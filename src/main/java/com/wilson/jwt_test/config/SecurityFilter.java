@@ -42,6 +42,8 @@ public class SecurityFilter {
 
                     authConfig.requestMatchers(HttpMethod.GET, "/products").hasAuthority(Permission.USER.name());
                     authConfig.requestMatchers(HttpMethod.POST, "/products").hasAuthority(Permission.ADMIN.name());
+                    authConfig.requestMatchers(HttpMethod.GET, "/user-details").authenticated();
+                    authConfig.requestMatchers(HttpMethod.POST, "/user-details").authenticated();
 
                     authConfig.anyRequest().denyAll();
 

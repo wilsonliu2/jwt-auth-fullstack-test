@@ -1,5 +1,6 @@
 package com.wilson.jwt_test.user;
 
+import com.wilson.jwt_test.userDetail.UserDetail;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,6 +13,18 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "_user")
 public class User implements UserDetails {
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserDetail> userDetails;
+
+    public User() {
+    }
+
+    public User(String username, String name, String password, Role role) {
+        this.username = username;
+        this.name = name;
+        this.password = password;
+        this.role = role;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
